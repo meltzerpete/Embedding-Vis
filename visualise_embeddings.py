@@ -44,5 +44,3 @@ for label, x, y in zip(labels, coords[:, 0], coords[:, 1]):
 
 plt.show()
 
-# plt.plot(emb[0], emb[1], ".")
-# plt.show()
