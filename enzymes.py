@@ -13,3 +13,7 @@ for id in [118, 295, 296]:
     nodes = all_graph_indicator[all_graph_indicator.graph == id]
     labels = nodes.merge(all_node_labels, left_index=True, right_index=True)["label"].reset_index().values
     np.savetxt(f"ENZYME{id}.labels", labels, fmt="%d", delimiter=" ")
+
+all_node_labels["id"] = list(np.arange(1, all_node_labels.size + 1))
+np.savetxt(f"all.labels", all_node_labels[["id", "label"]], fmt="%d", delimiter=" ")
+
