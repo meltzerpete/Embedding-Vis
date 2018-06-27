@@ -17,3 +17,7 @@ for id in [118, 295, 296]:
     # attributes
     attributes = all_node_attributes.iloc[nodes.index]
     np.savetxt("ENZYME" + str(id) + ".attributes", attributes, fmt="%f", delimiter=" ")
+
+all_node_labels["id"] = list(np.arange(1, all_node_labels.size + 1))
+np.savetxt(f"all.labels", all_node_labels[["id", "label"]], fmt="%d", delimiter=" ")
+
