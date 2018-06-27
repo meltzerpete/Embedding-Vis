@@ -1,11 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import manifold
+import pandas as pd
 
 # Heatmap
-emb = np.loadtxt("embedding.txt", delimiter=" ")
-labels = np.loadtxt("labels.txt", dtype=np.str)
-labels = np.loadtxt("ENZYME118.labels", delimiter=" ").transpose()[0]
+emb = np.loadtxt("embedding-emails.txt", delimiter=" ")[:,:-1]
+labels = np.loadtxt("embedding-emails.txt", delimiter=" ")[:,-1]
+colours = ['r','g','b','black','y','orange']
+cols = pd.DataFrame(labels).apply(lambda x: colours[int(x)], axis=1).values
+
+# pd.Dataframe(labels)
 
 dist = np.ndarray([len(emb), len(emb)])
 
@@ -33,15 +37,15 @@ coords = results.embedding_
 
 plt.subplots_adjust(bottom = 0.1)
 plt.scatter(
-    coords[:, 0], coords[:, 1], marker = 'o'
+    coords[:, 0], coords[:, 1], marker = 'o', c = cols
     )
-for label, x, y in zip(labels, coords[:, 0], coords[:, 1]):
-    plt.annotate(
-        label,
-        xy = (x, y), xytext = (-20, 20),
-        textcoords = 'offset points', ha = 'right', va = 'bottom',
-        bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),
-        arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+# for label, x, y in zip(labels, coords[:, 0], coords[:, 1]):
+#     plt.annotate(
+#         label,
+#         xy = (x, y), xytext = (-20, 20),
+#         textcoords = 'offset points', ha = 'right', va = 'bottom',
+#         bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),
+#         arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
 
 plt.show()
 
