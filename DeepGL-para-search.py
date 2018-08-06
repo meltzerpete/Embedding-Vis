@@ -24,9 +24,8 @@ from sklearn.metrics import f1_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 import signal
-import creds
 
-driver = GraphDatabase.driver("bolt://localhost", auth=("neo4j", creds.NEO4J_PASS))
+driver = GraphDatabase.driver("bolt://localhost", auth=("neo4j", "neo"))
 
 
 def load_data(edge_list_file, labels_file, attributes_file):
@@ -246,7 +245,8 @@ list_pruning_lambda = [0.5, 0.6, 0.7]
 list_diffusions = [2, 3, 4]
 list_iterations = [3, 4, 5, 6, 7]
 
-for name in ['ENZYMES']:
+finals = {}
+for name in ['YouTube']:
     attributes_file = None
     edge_list_file = edge_urls[name]
     labels_file = labels_urls[name]
